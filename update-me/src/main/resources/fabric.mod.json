@@ -15,8 +15,12 @@
         "dk.sebsa.updateme.client.UpdateMEClient"
       ]
     },
+    "mixins": [
+      "updateme.mixins.json"
+    ],
     "depends": {
       "fabricloader": ">=${loader_version}",
-      "minecraft": "${minecraft_version}"
+      "minecraft": "${minecraft_version}",
+      "yet_another_config_lib_v3": "*"
     }
   }

@@ -1,15 +1,32 @@
 plugins {
     id 'fabric-loom' version '1.4-SNAPSHOT'
     id 'maven-publish'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 version = project.mod_version
 group = project.maven_group
 
+repositories {
+    maven {
+        name 'Xander Maven'
+        url 'https://maven.isxander.dev/releases'
+    }
+    maven { // Used fpr gson used in yacl
+        url "https://maven.quiltmc.org/repository/release"
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation ("dev.isxander.yacl:yet-another-config-lib-fabric:3.2.1+1.20.2") {
+        //exclude(group: "org.quiltmc.parsers")
+        exclude(group: "com.twelvemonkeys.common")
+        exclude(group: "com.twelvemonkeys.imageio")
+    }
 }
 
 
@@ -74,4 +91,16 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+}
+
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
+    projectId = "9xIIYjBA" // This can be the project ID or the slug. Either will work!
+    versionNumber = project.mod_version // You don't need to set this manually. Will fail if Modrinth has this version already
+    versionType = "release" // This is the default -- can also be `beta` or `alpha`
+    uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+    gameVersions = [project.minecraft_version] // Must be an array, even with only one version
+    loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
+    syncBodyFrom = project.file("README.md").text
 }
