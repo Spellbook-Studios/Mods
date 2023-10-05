@@ -1,0 +1,22 @@
+{
+    "schemaVersion": 1,
+    "id": "update-me",
+    "version": "${version}",
+    "name": "Update ME!",
+    "description": "Informs the player when your modpack needs an update",
+    "authors": ["Sebsa"],
+    "contact": {
+      "repo": "https://github.com/Spellbook-Studios/Mods"
+    },
+    "license": "All-Rights-Reserved",
+    "environment": "client",
+    "entrypoints": {
+      "client": [
+        "dk.sebsa.updateme.client.UpdateMEClient"
+      ]
+    },
+    "depends": {
+      "fabricloader": ">=${loader_version}",
+      "minecraft": "${minecraft_version}"
+    }
+  }
