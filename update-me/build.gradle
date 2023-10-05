@@ -103,6 +103,9 @@ modrinth {
     gameVersions = [project.minecraft_version] // Must be an array, even with only one version
     loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     syncBodyFrom = project.file("README.md").text
+    dependencies {
+        required.project "yacl" // Creates a new required dependency on Fabric API
+    }
 }
 
 tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
