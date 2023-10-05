@@ -104,3 +104,5 @@ modrinth {
     loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     syncBodyFrom = project.file("README.md").text
 }
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
