@@ -1,3 +1,4 @@
+def mods
 pipeline {
     agent any
 
@@ -8,12 +9,20 @@ pipeline {
             }
         }
 
+        stage('Create Mod List') {
+            steps {
+                script {
+                    // you may create your list here, lets say reading from a file after checkout
+                    mods = ["nompmenu","update-me"]
+                }
+            }
+        }
+
         stage('Mods') {
             steps {
                 script {
-                    def mods = ["nompmenu","update-me"]
-                    for (int i = 0; i < mods.length; i++) {
-                        stage("Build ${mods[i]}") {
+                    for (int i = 0; i < mods.size(); i++) {
+                        stage(mods[i]) {
                             when {
                                 anyOf {
                                     changeset "${mods[i]}/**"
