@@ -23,12 +23,14 @@ pipeline {
                 script {
                     for (int i = 0; i < mods.size(); i++) {
                         stage(mods[i]) {
-                            when {
-                                anyOf {
-                                    changeset "${mods[i]}/**"
-                                }
-                            }
-                            steps {
+                            def dir = "${mods[i]}/**"
+
+                            def rc = sh(
+                              script: "git status -s ${dir} | grep -q ${dir}",
+                              returnStatus: true
+                            )
+
+                            if(!rc) {
                                 withGradle {
                                     sh './gradlew :${mods[i]}:remapJar'
                                 }
