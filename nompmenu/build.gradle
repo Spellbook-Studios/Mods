@@ -30,9 +30,12 @@ modrinth {
     token = System.getenv("MODRINTH_TOKEN") // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
     projectId = "no-multiplayer-menu" // This can be the project ID or the slug. Either will work!
     versionNumber = project.mod_version // You don't need to set this manually. Will fail if Modrinth has this version already
+    versionName = "No Multiplayer Menu " + versionNumber
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
     uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
     gameVersions = [project.minecraft_version] // Must be an array, even with only one version
+    changelog = project.hasProperty('changeLog') ?
+            project.getProperty('changeLog') : null
     loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     syncBodyFrom = rootProject.file("README.md").text
 }

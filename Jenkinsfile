@@ -1,4 +1,5 @@
 def mods
+def changes
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.when.impl.ChangeSetConditional
 
@@ -21,6 +22,10 @@ def hasChanges(String pattern) {
 pipeline {
     agent any
 
+    environment {
+        MODRINTH_TOKEN=credentials('modrinth-spellbook-studios-artifact')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -29,6 +34,16 @@ pipeline {
         }
 
         stage('Create Mod List') {
+            steps {
+                script {
+                    def commitChange = sh(returnStdout: true, script: "git log -1 --pretty=%s").trim()
+                    def commitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=%an").trim()
+                    changes = "Changes\n* " + commitChange + " - " + commitAuthor
+                }
+            }
+        }
+
+        stage('Gen Changelist') {
             steps {
                 script {
                     // you may create your list here, lets say reading from a file after checkout
@@ -44,7 +59,7 @@ pipeline {
                         stage(mods[i]) {
                             if(hasChanges("${mods[i]}/**")) {
                                 withGradle {
-                                    sh "./gradlew :${mods[i]}:remapJar"
+                                    sh "./gradlew -PchangeLog=${changes} :${mods[i]}:remapJar :${mods[i]}:modrinth"
                                 }
                                 archiveArtifacts artifacts: "${mods[i]}/build/libs/*.jar", fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
                             }
