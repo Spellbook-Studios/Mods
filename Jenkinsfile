@@ -46,7 +46,7 @@ pipeline {
                                 withGradle {
                                     sh "./gradlew :${mods[i]}:remapJar"
                                 }
-                                archiveArtifacts artifacts: '${mods[i]}/build/libs/*.jar', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
+                                archiveArtifacts artifacts: "${mods[i]}/build/libs/*.jar", fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
                             }
                         }
                     }
