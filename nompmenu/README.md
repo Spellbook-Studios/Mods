@@ -1,5 +1,4 @@
 ![Modrinth Version](https://img.shields.io/modrinth/v/chZpRxas?style=for-the-badge)  ![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/chZpRxas?style=for-the-badge)
-
 # No Multiplayer Menu
 This mod makes it impossible to open the multiplayer screen, and whenever the client tries to open the screen, the main title screen is opened instead.
 

@@ -1,5 +1,4 @@
 ![Modrinth Version](https://img.shields.io/modrinth/v/9xIIYjBA?style=for-the-badge)  ![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/9xIIYjBA?style=for-the-badge)
-
 # Update ME!
 Informs the player when your modpack needs an update
 
