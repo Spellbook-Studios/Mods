@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dk.sebsa.nompmenu.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

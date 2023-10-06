@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "nompmenu",
+  "version": "${version}",
+  "name": "NoMPMenu",
+  "description": "Allows packmakers set redirects from one menu to another",
+  "authors": ["Sebsa"],
+  "contact": {
+    "repo": "https://github.com/Seba244c/NoMPMenu"
+  },
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dk.sebsa.nompmenu.client.NoMPMenuClient"
+    ]
+  },
+  "mixins": [
+    "nompmenu.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
