@@ -1,4 +1,25 @@
 def mods
+
+import org.jenkinsci.plugins.pipeline.modeldefinition.when.impl.ChangeSetConditional
+
+def caseSensitive = false
+
+def hasChanges(String pattern) {
+    def changeLogSets = currentBuild.changeSets
+    def conditional = new ChangeSetConditional(pattern)
+
+    for (set in changeLogSets) {
+        def entries = set.items
+        for (entry in entries) {
+            if (conditional.changeSetMatches(entry, pattern, caseSensitive)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 pipeline {
     agent any
 
@@ -23,14 +44,7 @@ pipeline {
                 script {
                     for (int i = 0; i < mods.size(); i++) {
                         stage(mods[i]) {
-                            def dir = "${mods[i]}/**"
-
-                            def rc = sh(
-                              script: "git status -s ${dir} | grep -q ${dir}",
-                              returnStatus: true
-                            )
-
-                            if(!rc) {
+                            if(hasChanges("${mods[i]}/**")) {
                                 withGradle {
                                     sh './gradlew :${mods[i]}:remapJar'
                                 }
