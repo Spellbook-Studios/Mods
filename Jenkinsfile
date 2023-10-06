@@ -2,8 +2,6 @@ def mods
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.when.impl.ChangeSetConditional
 
-def caseSensitive = false
-
 def hasChanges(String pattern) {
     def changeLogSets = currentBuild.changeSets
     def conditional = new ChangeSetConditional(pattern)
@@ -11,7 +9,7 @@ def hasChanges(String pattern) {
     for (set in changeLogSets) {
         def entries = set.items
         for (entry in entries) {
-            if (conditional.changeSetMatches(entry, pattern, caseSensitive)) {
+            if (conditional.changeSetMatches(entry, pattern, false)) {
                 return true;
             }
         }
