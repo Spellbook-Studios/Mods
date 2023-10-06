@@ -38,7 +38,7 @@ pipeline {
                 script {
                     def commitChange = sh(returnStdout: true, script: "git log -1 --pretty=%s").trim()
                     def commitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=%an").trim()
-                    changes = "Changes\n* " + commitChange + " - " + commitAuthor
+                    changes = "Changes\\n* " + commitChange + " - " + commitAuthor
                 }
             }
         }
@@ -59,7 +59,7 @@ pipeline {
                         stage(mods[i]) {
                             if(hasChanges("${mods[i]}/**")) {
                                 withGradle {
-                                    sh "./gradlew -PchangeLog=${changes} :${mods[i]}:remapJar :${mods[i]}:modrinth"
+                                    sh "./gradlew :${mods[i]}:remapJar :${mods[i]}:modrinth -PchangeLog=${changes}"
                                 }
                                 archiveArtifacts artifacts: "${mods[i]}/build/libs/*.jar", fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
                             }
