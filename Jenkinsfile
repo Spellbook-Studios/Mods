@@ -44,7 +44,7 @@ pipeline {
                         stage(mods[i]) {
                             if(hasChanges("${mods[i]}/**")) {
                                 withGradle {
-                                    sh './gradlew :${mods[i]}:remapJar'
+                                    sh "./gradlew :${mods[i]}:remapJar"
                                 }
                                 archiveArtifacts artifacts: '${mods[i]}/build/libs/*.jar', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
                             }
