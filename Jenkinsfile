@@ -1,4 +1,3 @@
-def mods = ["nompmenu","update-me"]
 pipeline {
     agent any
 
@@ -12,6 +11,7 @@ pipeline {
         stage('Mods') {
             steps {
                 script {
+                    def mods = ["nompmenu","update-me"]
                     for (int i = 0; i < mods.length; i++) {
                         stage("Build ${mods[i]}") {
                             when {
