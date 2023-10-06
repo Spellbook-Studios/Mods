@@ -38,7 +38,7 @@ pipeline {
                 script {
                     def commitChange = sh(returnStdout: true, script: "git log -1 --pretty=%s").trim()
                     def commitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=%an").trim()
-                    changes = "Changes\\n* " + commitChange + " - " + commitAuthor
+                    changes = "* " + commitChange + " - " + commitAuthor
                 }
             }
         }
