@@ -34,7 +34,7 @@ modrinth {
     uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
     gameVersions = [project.minecraft_version] // Must be an array, even with only one version
     changelog = project.hasProperty('changeLog') ?
-            project.getProperty('changeLog') : null
+            project.getProperty('changeLog').replace("<n>","\\n") : null
     loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     syncBodyFrom = rootProject.file("README.md").text
 }
