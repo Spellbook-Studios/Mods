@@ -49,9 +49,10 @@ pipeline {
                     build = currentBuild
 
                     while(build != null && build.result != 'SUCCESS') {
-                        changes += "In ${build.id}:\n"
+                        changes += "In ${build.id}:"
                         for (changeLog in build.changeSets) {
-                            changes += +"* {changeLog.getMsg()}\n"
+                            changes += "<n>"
+                            changes += +"* {changeLog.getMsg()}"
                         }
                         build = build.previousBuild
                     }
@@ -60,9 +61,6 @@ pipeline {
         }
 
         stage('Mods') {
-            environment {
-                CHANGES=changes
-            }
             steps {
                 script {
                     for (int i = 0; i < mods.size(); i++) {
