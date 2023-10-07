@@ -52,7 +52,7 @@ pipeline {
                         changes += "In ${build.id}:"
                         for (changeLog in build.changeSets) {
                             changes += "<n>"
-                            changes += +"* {changeLog.getMsg()}"
+                            changes += "* {changeLog.getMsg()}"
                         }
                         build = build.previousBuild
                     }
