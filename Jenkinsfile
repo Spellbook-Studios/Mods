@@ -45,14 +45,13 @@ pipeline {
         stage('Gen Changelist') {
             steps {
                 script {
-                    changes = "Changes:\n"
+                    changes = "Changes:<n>"
                     build = currentBuild
 
                     while(build != null && build.result != 'SUCCESS') {
-                        changes += "In ${build.id}:"
                         for (changeLog in build.changeSets) {
                             changes += "<n>"
-                            changes += "* {changeLog.getMsg()}"
+                            changes += "* ${changeLog.getMsg()}"
                         }
                         build = build.previousBuild
                     }
