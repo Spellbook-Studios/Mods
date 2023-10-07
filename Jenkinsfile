@@ -50,8 +50,10 @@ pipeline {
 
                     while(build != null && build.result != 'SUCCESS') {
                         for (changeLog in build.changeSets) {
-                            changes += "<n>"
-                            changes += "* ${changeLog.getMsg()}"
+                            for (change in changeLog) {
+                                changes += "<n>"
+                                changes += "* ${change.getMsg()} - ${change.getAuthorName()}"
+                            }
                         }
                         build = build.previousBuild
                     }
