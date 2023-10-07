@@ -36,9 +36,8 @@ pipeline {
         stage('Create Mod List') {
             steps {
                 script {
-                    def commitChange = sh(returnStdout: true, script: "git log -1 --pretty=%s").trim()
-                    def commitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=%an").trim()
-                    changes = "* " + commitChange + " - " + commitAuthor
+                    // you may create your list here, lets say reading from a file after checkout
+                    mods = ["nompmenu","update-me"]
                 }
             }
         }
@@ -46,13 +45,24 @@ pipeline {
         stage('Gen Changelist') {
             steps {
                 script {
-                    // you may create your list here, lets say reading from a file after checkout
-                    mods = ["nompmenu","update-me"]
+                    changes = "Changes:\n"
+                    build = currentBuild
+
+                    while(build != null && build.result != 'SUCCESS') {
+                        changes += "In ${build.id}:\n"
+                        for (changeLog in build.changeSets) {
+                            changes += +"* {changeLog.getMsg()}\n"
+                        }
+                        build = build.previousBuild
+                    }
                 }
             }
         }
 
         stage('Mods') {
+            environment {
+                CHANGES=changes
+            }
             steps {
                 script {
                     for (int i = 0; i < mods.size(); i++) {
