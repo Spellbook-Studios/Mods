@@ -7,3 +7,7 @@ This mod makes it impossible to open the multiplayer screen, and whenever the cl
 * When you don't want player to be able to access the multiplayer screen
 * When you want people to be sent to the main menu after leaving a server
     * e.g. <https://modrinth.com/modpack/wynncraft-ultimate>
+
+### Using this
+You are allowed to use this in any personal modpack,
+but this mod may only be distributed in modpacks published on Modrinth and Curseforge

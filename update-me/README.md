@@ -13,3 +13,7 @@ Informs the player when your modpack needs an update
 ### Screenshots
 Example:
 ![Screen asking the player to update](https://web-static.sebsa.dk/upload/e/w6dx749.png)
+
+### Using this
+You are allowed to use this in any personal modpack,
+but this mod may only be distributed in modpacks published on Modrinth and Curseforge
